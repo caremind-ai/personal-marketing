@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal — Health that finally knows you</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAFAF8;
+      --bg-warm: #F5F0E8;
+      --bg-dark: #1A1A18;
+      --text: #1A1A1A;
+      --text-muted: #6B6B65;
+      --text-light: #9B9B93;
+      --coral: #E8654A;
+      --coral-dark: #D4523A;
+      --coral-light: #FDF0ED;
+      --green: #4A9E6E;
+      --border: #E8E4DC;
+      --card: #FFFFFF;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --radius: 16px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.06);
+      --shadow-lg: 0 16px 64px rgba(0,0,0,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 68px;
+      background: rgba(250,250,248,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.06); }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem; font-weight: 500;
+      color: var(--text-muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: 50px;
+      font-family: var(--sans); font-size: 0.875rem; font-weight: 600;
+      cursor: pointer; border: none; text-decoration: none;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-ghost {
+      background: transparent; color: var(--text-muted);
+    }
+    .btn-ghost:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+    .btn-coral {
+      background: var(--coral); color: white;
+      box-shadow: 0 2px 8px rgba(232,101,74,0.3);
+    }
+    .btn-coral:hover { background: var(--coral-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(232,101,74,0.4); }
+    .btn-lg { padding: 14px 28px; font-size: 1rem; }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--text); background: rgba(0,0,0,0.02); }
+    .btn-white {
+      background: white; color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .btn-white:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding: 120px 48px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-content {}
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--coral-light); color: var(--coral);
+      padding: 6px 14px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em;
+      text-transform: uppercase; margin-bottom: 28px;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--coral); border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .hero h1 em {
+      font-style: italic; color: var(--coral);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem; color: var(--text-muted);
+      line-height: 1.7; max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+
+    .hero-social-proof {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .hero-avatars {
+      display: flex;
+    }
+    .hero-avatars span {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 2px solid var(--bg);
+      margin-left: -10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 600; color: white;
+    }
+    .hero-avatars span:first-child { margin-left: 0; }
+    .hero-proof-text { font-size: 0.875rem; color: var(--text-muted); }
+    .hero-proof-text strong { color: var(--text); }
+
+    /* ── PHONE MOCKUP ── */
+    .hero-visual {
+      display: flex; justify-content: center; align-items: center;
+      position: relative;
+    }
+
+    .phone {
+      width: 280px;
+      background: #0F0F0D;
+      border-radius: 44px;
+      padding: 16px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.08);
+      position: relative;
+      z-index: 2;
+    }
+    .phone-inner {
+      background: #1A1A18;
+      border-radius: 32px;
+      overflow: hidden;
+      height: 560px;
+      display: flex; flex-direction: column;
+    }
+    .phone-status {
+      padding: 16px 20px 8px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.7rem; color: rgba(255,255,255,0.5); font-weight: 500;
+    }
+    .phone-content { flex: 1; padding: 8px 16px 16px; overflow: hidden; }
+
+    .app-header {
+      margin-bottom: 16px;
+    }
+    .app-greeting {
+      font-size: 0.65rem; color: rgba(255,255,255,0.4);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px;
+    }
+    .app-name { font-size: 1.1rem; color: white; font-weight: 600; }
+
+    .health-score-card {
+      background: linear-gradient(135deg, #E8654A, #C4453A);
+      border-radius: 16px; padding: 16px;
+      margin-bottom: 12px;
+    }
+    .score-label { font-size: 0.6rem; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .score-value { font-size: 2.4rem; font-weight: 700; color: white; line-height: 1; }
+    .score-sub { font-size: 0.65rem; color: rgba(255,255,255,0.75); margin-top: 4px; }
+    .score-bar { height: 3px; background: rgba(255,255,255,0.2); border-radius: 2px; margin-top: 12px; }
+    .score-bar-fill { height: 100%; width: 78%; background: white; border-radius: 2px; }
+
+    .metrics-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; margin-bottom: 12px;
+    }
+    .metric-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px; padding: 10px 12px;
+    }
+    .metric-label { font-size: 0.58rem; color: rgba(255,255,255,0.4); margin-bottom: 4px; }
+    .metric-value { font-size: 1rem; font-weight: 600; color: white; }
+    .metric-unit { font-size: 0.6rem; color: rgba(255,255,255,0.4); }
+    .metric-trend { font-size: 0.58rem; color: #4A9E6E; margin-top: 2px; }
+
+    .alert-card {
+      background: rgba(232,101,74,0.12);
+      border: 1px solid rgba(232,101,74,0.25);
+      border-radius: 12px; padding: 10px 12px;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .alert-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .alert-title { font-size: 0.65rem; font-weight: 600; color: white; margin-bottom: 2px; }
+    .alert-text { font-size: 0.58rem; color: rgba(255,255,255,0.5); line-height: 1.4; }
+
+    .gp-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px; padding: 10px 12px;
+      display: flex; gap: 10px; align-items: center;
+      margin-top: 8px;
+    }
+    .gp-avatar {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, #4A9E6E, #2D7A52);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 700; color: white; flex-shrink: 0;
+    }
+    .gp-info {}
+    .gp-name { font-size: 0.65rem; font-weight: 600; color: white; }
+    .gp-status { font-size: 0.58rem; color: rgba(255,255,255,0.4); }
+    .gp-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #4A9E6E; margin-right: 4px; }
+
+    .floating-card {
+      position: absolute;
+      background: white;
+      border-radius: 12px;
+      padding: 10px 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      font-size: 0.75rem;
+      z-index: 3;
+    }
+    .float-left {
+      left: -32px; top: 30%;
+      max-width: 160px;
+    }
+    .float-right {
+      right: -28px; top: 60%;
+      max-width: 150px;
+    }
+    .float-label { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 2px; }
+    .float-value { font-weight: 700; color: var(--text); }
+    .float-icon { font-size: 1.2rem; margin-bottom: 4px; }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 400px; height: 400px;
+      background: var(--coral);
+      top: 10%; right: -10%;
+    }
+    .orb-2 {
+      width: 300px; height: 300px;
+      background: #4A9E6E;
+      bottom: 10%; left: 10%;
+    }
+
+    /* ── PROBLEM SECTION ── */
+    .problem {
+      background: var(--bg-dark);
+      padding: 120px 48px;
+      text-align: center;
+    }
+    .problem-inner { max-width: 760px; margin: 0 auto; }
+    .problem p {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .problem p span { color: rgba(255,255,255,0.3); }
+    .problem-close {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
+      color: white !important;
+      font-weight: 700 !important;
+    }
+
+    /* ── PILLARS ── */
+    .pillars {
+      padding: 120px 48px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--coral);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700; line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 64px;
+      max-width: 600px;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .pillar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .pillar-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .pillar-number {
+      font-size: 0.75rem; font-weight: 600; color: var(--text-light);
+      letter-spacing: 0.08em; margin-bottom: 24px;
+    }
+    .pillar-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 20px;
+    }
+    .pillar-icon.coral { background: var(--coral-light); }
+    .pillar-icon.green { background: rgba(74,158,110,0.1); }
+    .pillar-icon.blue { background: rgba(74,108,210,0.1); }
+    .pillar-card h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem; font-weight: 600;
+      margin-bottom: 12px; line-height: 1.3;
+    }
+    .pillar-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* ── FEATURES ── */
+    .features {
+      background: var(--bg-warm);
+      padding: 120px 48px;
+    }
+    .features-inner { max-width: 1200px; margin: 0 auto; }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .feature-tile {
+      background: var(--bg-warm);
+      padding: 36px 32px;
+      transition: background 0.2s;
+    }
+    .feature-tile:hover { background: white; }
+    .feature-tile-icon { font-size: 2rem; margin-bottom: 16px; }
+    .feature-tile h4 {
+      font-size: 1rem; font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .feature-tile p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── ACCESS ── */
+    .access {
+      padding: 80px 48px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .access-card {
+      background: linear-gradient(135deg, #1A2F1A, #0F1F10);
+      border-radius: 24px;
+      padding: 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .access-card h2 {
+      font-family: var(--serif);
+      font-size: 2.2rem; font-weight: 700;
+      color: white; line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .access-card h2 em { font-style: italic; color: #6DC98A; }
+    .access-card p { color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 28px; }
+    .access-groups {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .access-tag {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.8);
+      padding: 6px 14px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 500;
+    }
+    .access-visual {
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .access-stat {
+      background: rgba(255,255,255,0.06);
+      border-radius: 14px; padding: 20px 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .access-stat-num {
+      font-size: 2rem; font-weight: 700; color: white; line-height: 1;
+      margin-bottom: 4px;
+    }
+    .access-stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+
+    /* ── PRICING ── */
+    .pricing {
+      padding: 120px 48px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .price-card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .price-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .price-card.featured {
+      border-color: var(--coral);
+      background: var(--coral-light);
+    }
+    .price-badge {
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      background: var(--coral); color: white;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 50px;
+      white-space: nowrap;
+    }
+    .price-name { font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+    .price-amount {
+      font-family: var(--serif);
+      font-size: 2rem; font-weight: 700; color: var(--text);
+      line-height: 1;
+    }
+    .price-amount span { font-size: 0.9rem; font-weight: 400; color: var(--text-muted); }
+    .price-desc { font-size: 0.78rem; color: var(--text-muted); margin: 12px 0 20px; line-height: 1.5; }
+    .price-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .price-features li {
+      font-size: 0.78rem; color: var(--text-muted);
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .price-features li::before {
+      content: '✓'; color: var(--green);
+      font-weight: 700; flex-shrink: 0; margin-top: 0px;
+    }
+    .price-cta { width: 100%; margin-top: 20px; text-align: center; justify-content: center; }
+
+    /* ── FINAL CTA ── */
+    .final-cta {
+      padding: 120px 48px;
+      text-align: center;
+      background: var(--bg-dark);
+    }
+    .final-cta h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700; color: white;
+      line-height: 1.15; letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .final-cta h2 em { font-style: italic; color: var(--coral); }
+    .final-cta p { color: rgba(255,255,255,0.5); font-size: 1rem; margin-bottom: 40px; }
+    .final-cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .store-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: white; color: var(--text);
+      padding: 12px 24px; border-radius: 12px;
+      text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .store-btn-icon { font-size: 1.4rem; }
+    .store-btn-text { display: flex; flex-direction: column; text-align: left; }
+    .store-btn-sub { font-size: 0.65rem; font-weight: 400; color: var(--text-muted); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg-dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 48px;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+    }
+    .footer-brand {}
+    .footer-logo {
+      font-family: var(--serif); font-size: 1.3rem;
+      font-weight: 700; color: white; margin-bottom: 12px;
+    }
+    .footer-tagline { font-size: 0.875rem; color: rgba(255,255,255,0.35); line-height: 1.6; }
+    .footer-col h5 {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a {
+      font-size: 0.875rem; color: rgba(255,255,255,0.5);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-col a:hover { color: white; }
+    .footer-bottom {
+      max-width: 1200px; margin: 32px auto 0;
+      padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-copy { font-size: 0.8rem; color: rgba(255,255,255,0.25); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; text-align: center; }
+      .hero-sub { margin: 0 auto 40px; }
+      .hero-actions { justify-content: center; }
+      .hero-social-proof { justify-content: center; }
+      .hero-visual { margin-top: 40px; }
+      .float-left, .float-right { display: none; }
+      .pillars { padding: 80px 24px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .features { padding: 80px 24px; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .access { padding: 40px 24px; }
+      .access-card { grid-template-columns: 1fr; padding: 40px 32px; gap: 32px; }
+      .pricing { padding: 80px 24px; }
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
+      .final-cta { padding: 80px 24px; }
+      footer { padding: 40px 24px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .problem { padding: 80px 24px; }
+    }
+
+    @media (max-width: 600px) {
+      .features-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Personal</a>
+  <ul class="nav-links">
+    <li><a href="#pillars">How it works</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#providers">For Providers</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn btn-ghost">Download</a>
+    <a href="#pricing" class="btn btn-coral">Get started free</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="position:relative; overflow:hidden;">
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Now available on iOS</div>
+    <h1>Health that finally <em>knows you.</em></h1>
+    <p class="hero-sub">Your AI health companion and dedicated doctor — always monitoring, always proactive, always yours. Free for everyone.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn btn-coral btn-lg">↓ Download for iOS</a>
+      <a href="#pillars" class="btn btn-outline btn-lg">How it works</a>
+    </div>
+    <div class="hero-social-proof">
+      <div class="hero-avatars">
+        <span style="background: linear-gradient(135deg, #E8654A, #C44);">AM</span>
+        <span style="background: linear-gradient(135deg, #4A9E6E, #2D7A);">SC</span>
+        <span style="background: linear-gradient(135deg, #4A6CD2, #2D4A);">JR</span>
+        <span style="background: linear-gradient(135deg, #9E4A8A, #7A2D);">MK</span>
+      </div>
+      <p class="hero-proof-text"><strong>12,000+ people</strong> already have their own doctor</p>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="floating-card float-left">
+      <div class="float-icon">🫀</div>
+      <div class="float-label">Resting HR</div>
+      <div class="float-value">58 bpm <span style="color: #4A9E6E; font-size:0.7rem;">↓ 4%</span></div>
+    </div>
+
+    <div class="phone">
+      <div class="phone-inner">
+        <div class="phone-status">
+          <span>9:41</span>
+          <span>●●● 100%</span>
+        </div>
+        <div class="phone-content">
+          <div class="app-header">
+            <div class="app-greeting">Good morning</div>
+            <div class="app-name">Alex</div>
+          </div>
+
+          <div class="health-score-card">
+            <div class="score-label">Health Score</div>
+            <div class="score-value">82</div>
+            <div class="score-sub">↑ 3 points this week · Excellent</div>
+            <div class="score-bar"><div class="score-bar-fill"></div></div>
+          </div>
+
+          <div class="metrics-row">
+            <div class="metric-card">
+              <div class="metric-label">Sleep</div>
+              <div class="metric-value">7.4 <span class="metric-unit">hrs</span></div>
+              <div class="metric-trend">↑ Better than avg</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-label">HRV</div>
+              <div class="metric-value">52 <span class="metric-unit">ms</span></div>
+              <div class="metric-trend" style="color: #E8654A;">↓ Watch trend</div>
+            </div>
+          </div>
+
+          <div class="alert-card">
+            <div class="alert-icon">⚡</div>
+            <div>
+              <div class="alert-title">Personal noticed something</div>
+              <div class="alert-text">Your HRV has declined 12% over 5 days. Dr. Chen has been notified and will reach out today.</div>
+            </div>
+          </div>
+
+          <div class="gp-card">
+            <div class="gp-avatar">SC</div>
+            <div class="gp-info">
+              <div class="gp-name">Dr. Sarah Chen, MD</div>
+              <div class="gp-status"><span class="gp-dot"></span>Your doctor · Available now</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="floating-card float-right">
+      <div class="float-icon">💊</div>
+      <div class="float-label">Rx refilled</div>
+      <div class="float-value">Delivered tomorrow</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="problem-inner">
+    <p><span>Every other health app shows you data.</span></p>
+    <p><span>Every other telemedicine service gives you a random doctor.</span></p>
+    <p><span>Every other AI answers your questions.</span></p>
+    <p class="problem-close">None of them know you.</p>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="section-label">How it works</div>
+  <h2 class="section-title">Three things no one else does. All in one place.</h2>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-number">01</div>
+      <div class="pillar-icon coral">🧠</div>
+      <h3>Your AI companion</h3>
+      <p>Monitors your HealthKit data, wearables, and labs continuously. Spots patterns before you feel them. Answers questions, orders labs, books appointments, and refills prescriptions — without you having to ask.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-number">02</div>
+      <div class="pillar-icon green">🩺</div>
+      <h3>Your dedicated doctor</h3>
+      <p>A real, licensed GP who sees your full health picture in real-time. Same doctor, every time. They already know your history, your patterns, your concerns — before every conversation begins.</p>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-number">03</div>
+      <div class="pillar-icon blue">⚡</div>
+      <h3>Health running itself</h3>
+      <p>Personal doesn't wait for you to open the app. It watches, learns, and acts — alerting your doctor, scheduling check-ins, and taking care of the logistics so your health is managed continuously.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-inner">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything your health needs. Nothing it doesn't.</h2>
+    <div class="features-grid">
+      <div class="feature-tile">
+        <div class="feature-tile-icon">📡</div>
+        <h4>Always-on monitoring</h4>
+        <p>HealthKit, wearables, labs, and EHR data — all unified into one continuously updated health graph.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-tile-icon">🔔</div>
+        <h4>Proactive alerts</h4>
+        <p>AI detects declining trends before they become symptoms — and notifies your doctor automatically.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-tile-icon">📋</div>
+        <h4>Clinical reports</h4>
+        <p>Professional-grade health summaries generated automatically. Share with any provider, anywhere.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-tile-icon">⚡</div>
+        <h4>Agentic actions</h4>
+        <p>Books appointments, refills Rx, orders labs, submits insurance claims — all on your behalf.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-tile-icon">👨‍⚕️</div>
+        <h4>Dedicated GP</h4>
+        <p>Your doctor already knows you. Unlimited async messaging. Video when it matters. Same face, every time.</p>
+      </div>
+      <div class="feature-tile">
+        <div class="feature-tile-icon">👨‍👩‍👧‍👦</div>
+        <h4>Family plan</h4>
+        <p>One GP who knows your whole family. Add your partner, parents, or children. Everyone covered.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="access">
+  <div class="access-card">
+    <div>
+      <h2>Healthcare is a right, <em>not a luxury.</em></h2>
+      <p>Personal is completely free — full Premium features, no compromise — for people who need it most. We believe everyone deserves a doctor who knows them.</p>
+      <div class="access-groups">
+        <span class="access-tag">Medicaid / CHIP</span>
+        <span class="access-tag">Veterans</span>
+        <span class="access-tag">Students</span>
+        <span class="access-tag">SNAP / WIC recipients</span>
+        <span class="access-tag">Healthcare workers</span>
+        <span class="access-tag">Low-income households</span>
+      </div>
+      <br>
+      <a href="#" class="btn btn-white btn-lg" style="margin-top: 8px;">Check if you qualify →</a>
+    </div>
+    <div class="access-visual">
+      <div class="access-stat">
+        <div class="access-stat-num">100M+</div>
+        <div class="access-stat-label">Americans who qualify for free access</div>
+      </div>
+      <div class="access-stat">
+        <div class="access-stat-num">$0</div>
+        <div class="access-stat-label">Cost for qualifying members — forever</div>
+      </div>
+      <div class="access-stat">
+        <div class="access-stat-num">Same</div>
+        <div class="access-stat-label">Exact same features as paid Premium tier</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">Start free. Upgrade when you're ready.</h2>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Free</div>
+      <div class="price-amount">$0</div>
+      <div class="price-desc">Basic AI health tracking. Always free, forever.</div>
+      <ul class="price-features">
+        <li>HealthKit + wearable sync</li>
+        <li>Weekly AI health summary</li>
+        <li>Health score</li>
+        <li>1 clinical report/month</li>
+      </ul>
+      <a href="#" class="btn btn-outline price-cta">Get started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Plus</div>
+      <div class="price-amount">$9<span>/mo</span></div>
+      <div class="price-desc">Real-time AI that acts on your behalf.</div>
+      <ul class="price-features">
+        <li>Everything in Free</li>
+        <li>Real-time proactive alerts</li>
+        <li>Unlimited clinical reports</li>
+        <li>Agentic: booking, Rx, labs</li>
+        <li>Unlimited AI chat</li>
+      </ul>
+      <a href="#" class="btn btn-outline price-cta">Start Plus</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">Most popular</div>
+      <div class="price-name">Premium</div>
+      <div class="price-amount">$29<span>/mo</span></div>
+      <div class="price-desc">Advanced AI + full wellbeing suite.</div>
+      <ul class="price-features">
+        <li>Everything in Plus</li>
+        <li>Multi-AI consensus analysis</li>
+        <li>Predictive risk modeling</li>
+        <li>Mental health integration</li>
+        <li>Nutrition coaching AI</li>
+        <li>GoodRx Rx integration</li>
+      </ul>
+      <a href="#" class="btn btn-coral price-cta">Start Premium</a>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Care</div>
+      <div class="price-amount">$79<span>/mo</span></div>
+      <div class="price-desc">Your own dedicated GP who knows you.</div>
+      <ul class="price-features">
+        <li>Everything in Premium</li>
+        <li>Dedicated licensed GP</li>
+        <li>Unlimited async messaging</li>
+        <li>2 video visits/month</li>
+        <li>GP writes Rx + referrals</li>
+        <li>Telemedicine via video</li>
+      </ul>
+      <a href="#" class="btn btn-outline price-cta">Get Care</a>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Family</div>
+      <div class="price-amount">$79<span>+ $35</span></div>
+      <div class="price-desc">Care for your whole family. One GP who knows everyone.</div>
+      <ul class="price-features">
+        <li>Everything in Care</li>
+        <li>+$35/mo per member</li>
+        <li>Shared or separate GPs</li>
+        <li>Adult + elderly parents</li>
+        <li>Family health dashboard</li>
+        <li>Caregiver alerts</li>
+      </ul>
+      <a href="#" class="btn btn-outline price-cta">Get Family</a>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:24px; font-size:0.85rem; color:var(--text-muted);">
+    Medicaid, veterans, students, and low-income households get Premium free. <a href="#" style="color:var(--coral);">Check eligibility →</a>
+  </p>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Your health deserves to be <em>personal.</em></h2>
+  <p>Join 12,000+ people who finally have a doctor who knows them.</p>
+  <div class="final-cta-actions">
+    <a href="#" class="store-btn">
+      <span class="store-btn-icon"></span>
+      <span class="store-btn-text">
+        <span class="store-btn-sub">Download on the</span>
+        App Store
+      </span>
+    </a>
+    <a href="#" class="store-btn">
+      <span class="store-btn-icon">▶</span>
+      <span class="store-btn-text">
+        <span class="store-btn-sub">Get it on</span>
+        Google Play
+      </span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">Personal</div>
+      <p class="footer-tagline">Your AI health companion and dedicated doctor. Health that finally knows you.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <ul>
+        <li><a href="#">How it works</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Family plan</a></li>
+        <li><a href="#">Access program</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>For providers</h5>
+      <ul>
+        <li><a href="#">GP AI OS</a></li>
+        <li><a href="#">For employers</a></li>
+        <li><a href="#">For insurers</a></li>
+        <li><a href="#">Research</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Privacy</a></li>
+        <li><a href="#">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Personal Health, Inc. Not a substitute for professional medical advice.</p>
+    <p class="footer-copy">HIPAA compliant · SOC 2 Type II · FDA CDS exempt</p>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Animate problem section lines on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('p').forEach((p, i) => {
+          setTimeout(() => p.style.opacity = '1', i * 200);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const problem = document.querySelector('.problem-inner');
+  if (problem) {
+    problem.querySelectorAll('p').forEach(p => p.style.opacity = '0');
+    problem.querySelectorAll('p').forEach(p => p.style.transition = 'opacity 0.6s');
+    observer.observe(problem);
+  }
+
+  // Pillar cards entrance animation
+  const cardObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, 100);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.pillar-card').forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(24px)';
+    card.style.transition = `opacity 0.5s ${i * 0.1}s, transform 0.5s ${i * 0.1}s`;
+    cardObserver.observe(card);
+  });
+</script>
+</body>
+</html>
