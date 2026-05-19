@@ -146,5 +146,5 @@ Scale from 2 GP beta to 10 GPs. Standardize GP onboarding process. Target: 500 C
 ## Notes
 
 - The pre-visit summary (TICKET-5.4) is the core differentiation. If the GP walks into a call with full context, patients feel the difference immediately. This is what makes Personal feel like concierge medicine.
-- Doxy.me BAA must be signed before any video visits. Add to M7 parallel with EPIC-4 build.
 - GP offboarding (TICKET-5.6) must be planned before launch — patients need assurance their GP isn't going away without notice.
+- Doxy.me BAA and full HIPAA vendor sign-off are handled in EPIC-6 (TICKET-6.7–6.9) before commercial launch. Beta video visits use test accounts only.
