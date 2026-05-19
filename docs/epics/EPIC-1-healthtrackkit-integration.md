@@ -87,4 +87,5 @@ Add email capture to `personal.g-a-l-a-c-t-i-c.com` marketing site. Store signup
 ## Notes
 
 - The smoke test (TICKET-1.2) gates the M3 beta — no external users without it passing.
-- BAA procurement and HIPAA compliance sign-off are deferred to EPIC-6 (pre-commercialization). See TICKET-6.7–6.9 for details. Development uses synthetic/test data until BAAs are in place.
+- Free / Plus / Premium tiers are consumer wellness products. HealthKit data the user grants directly to the app is **not** PHI under HIPAA — no BAA required for these tiers. HIPAA obligations attach at EPIC-4 when contracted GPs begin treating patients.
+- FTC Health Breach Notification Rule and state privacy laws (CCPA, Washington My Health My Data Act) do apply to consumer health data. Addressed in EPIC-2 and TICKET-3.6 (privacy labels, terms of service).

@@ -138,55 +138,6 @@ Build an Android version of the Personal app using Google Health Connect for hea
 
 ---
 
-### TICKET-6.7: BAA Procurement — Anthropic + Cloudflare
-**Story Points**: 3  
-**Dependencies**: None (can start any time; complete before commercial launch)
-
-**Description:**
-Obtain signed BAAs from Anthropic (covering Claude models in the AI synthesis pipeline) and Cloudflare (covering Workers, KV, R2, AI Gateway). Both require paid/enterprise plans.
-
-**Acceptance Criteria:**
-- [ ] Anthropic enterprise agreement signed; BAA executed
-- [ ] Cloudflare BAA executed (Cloudflare Business or Enterprise plan)
-- [ ] Both BAAs stored in secure legal document repository
-- [ ] ENVIRONMENTS.md updated with BAA effective dates
-- [ ] AI worker and gateway deployment configs annotated with BAA coverage
-
----
-
-### TICKET-6.8: BAA Procurement — Fly.io + Supabase + Doxy.me
-**Story Points**: 2  
-**Dependencies**: None (can start any time; complete before commercial launch)
-
-**Description:**
-Obtain signed BAAs from Fly.io (hosting Rust Core), Supabase (PostgreSQL PHI store), and Doxy.me (HIPAA-compliant video). All three offer BAAs on paid plans.
-
-**Acceptance Criteria:**
-- [ ] Fly.io BAA executed (Fly.io Scale plan required)
-- [ ] Supabase BAA executed (confirm signed, not just HIPAA plan active)
-- [ ] Doxy.me BAA executed (required for HIPAA video visits with real patients)
-- [ ] All BAAs stored in secure legal document repository
-- [ ] ENVIRONMENTS.md updated with all BAA statuses
-
----
-
-### TICKET-6.9: HIPAA Compliance Audit + Privacy Policy
-**Story Points**: 3  
-**Dependencies**: TICKET-6.7, TICKET-6.8
-
-**Description:**
-Before commercial launch: complete HIPAA Security Rule technical safeguards checklist, publish a HIPAA-compliant privacy policy and Notice of Privacy Practices (NPP), and confirm all PHI data flows are covered by executed BAAs.
-
-**Acceptance Criteria:**
-- [ ] HIPAA Security Rule checklist completed (access controls, audit logs, encryption at rest + in transit, breach notification procedure)
-- [ ] Privacy policy published at `personal.health/privacy` (or equivalent)
-- [ ] Notice of Privacy Practices (NPP) in app and on website
-- [ ] All PHI data flows mapped and confirmed covered by BAAs (no uncovered vendor)
-- [ ] SECURITY.md updated with full compliance status
-- [ ] External HIPAA counsel review completed (or internal sign-off if counsel unavailable)
-
----
-
 ## Definition of Done
 
 - [ ] Family plan live and accepting multi-member enrollments
@@ -194,8 +145,6 @@ Before commercial launch: complete HIPAA Security Rule technical safeguards chec
 - [ ] eRx routing live (GoodRx integration)
 - [ ] Lab order routing live (LabCorp + Quest)
 - [ ] All 50 states covered by at least 1 licensed GP
-- [ ] All BAAs signed (Anthropic, Cloudflare, Fly.io, Supabase, Doxy.me)
-- [ ] HIPAA compliance audit complete; privacy policy and NPP published
 - [ ] MRR ≥ $150K (all tiers combined)
 - [ ] Path to $5M ARR visible (500 Care + B2B + referral revenue)
 

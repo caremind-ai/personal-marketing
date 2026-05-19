@@ -149,3 +149,4 @@ Set up TestFlight beta distribution for 200 beta users. Waitlist-to-beta convers
 - D30 retention of 35% is the gate for Phase 2 (public App Store launch). If retention is below 30%, hold launch and iterate on core loop.
 - Emergency escalation (TICKET-2.2) is P0 — do not ship without it.
 - "Ask Personal" chat must clearly distinguish AI from GP throughout — this matters for regulatory posture.
+- **No HIPAA obligations on consumer tiers.** HealthKit data granted directly by the user is not PHI. Applicable law here is the FTC Health Breach Notification Rule and state laws (CCPA; Washington My Health My Data Act is aggressive — health data from WA residents has extra requirements). Privacy policy (TICKET-3.6) must address these before public launch.

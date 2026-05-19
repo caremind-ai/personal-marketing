@@ -110,11 +110,11 @@ Queue of pending Rx refill requests and referral letters for GP review. GP sees 
 ---
 
 ### TICKET-4.6: GP Beta Onboarding — 2 Contracted GPs
-**Story Points**: 3  
+**Story Points**: 5  
 **Dependencies**: TICKET-4.5
 
 **Description:**
-Recruit and onboard 2 contracted GPs for beta. GPs sign contractor agreement covering scope, compensation, response SLAs, and malpractice coverage confirmation. Assign initial patient panels of 10–20 Care tier subscribers.
+Recruit and onboard 2 contracted GPs for beta. GPs sign contractor agreement covering scope, compensation, response SLAs, and malpractice coverage confirmation. Assign initial patient panels of 10–20 Care tier subscribers. BAAs with infrastructure vendors must be signed before any real-patient PHI flows — this ticket is the trigger point.
 
 **Acceptance Criteria:**
 - [ ] 2 GPs contracted with signed agreement (NDA, contractor terms, SLA, malpractice confirmation)
@@ -123,6 +123,10 @@ Recruit and onboard 2 contracted GPs for beta. GPs sign contractor agreement cov
 - [ ] GP training session: 1-hour walkthrough of Provider AI OS with Q&A
 - [ ] GP feedback loop: weekly async check-in for first 4 weeks
 - [ ] Emergency coverage: GPs coordinate coverage between themselves; escalation to urgent care for after-hours
+- [ ] **BAA gate**: Anthropic, Cloudflare, Fly.io, and Supabase BAAs signed before first real patient is assigned to a GP (contracting GP treatment = Covered Entity or BA status; PHI in all four systems from this point)
+
+**Technical Notes:**
+- GP employment structure determines HIPAA role: 1099 independent contractors → Personal may be Business Associate to the GP (Covered Entity); W-2 or Personal-owned PC → Personal is the Covered Entity. Confirm with counsel before GP agreements are signed — it changes who executes which BAA.
 
 ---
 
