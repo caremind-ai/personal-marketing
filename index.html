@@ -89,6 +89,7 @@
       box-shadow: 0 2px 8px rgba(232,101,74,0.3);
     }
     .btn-coral:hover { background: var(--coral-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(232,101,74,0.4); }
+    .btn-coral:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
     .btn-lg { padding: 14px 28px; font-size: 1rem; }
     .btn-outline {
       background: transparent; color: var(--text);
@@ -150,24 +151,69 @@
       margin-bottom: 40px;
     }
 
-    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
 
     .hero-social-proof {
       display: flex; align-items: center; gap: 16px;
     }
-    .hero-avatars {
-      display: flex;
-    }
-    .hero-avatars span {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 2px solid var(--bg);
-      margin-left: -10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 600; color: white;
-    }
-    .hero-avatars span:first-child { margin-left: 0; }
     .hero-proof-text { font-size: 0.875rem; color: var(--text-muted); }
     .hero-proof-text strong { color: var(--text); }
+
+    /* ── WAITLIST FORM ── */
+    .waitlist-form-wrap { width: 100%; max-width: 520px; margin-bottom: 16px; }
+    .waitlist-form {
+      display: flex; gap: 8px;
+      margin-bottom: 12px;
+    }
+    .waitlist-input {
+      flex: 1; min-width: 0;
+      padding: 14px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 50px;
+      font-family: var(--sans); font-size: 1rem;
+      background: white; color: var(--text);
+      outline: none; transition: border-color 0.2s;
+    }
+    .waitlist-input:focus { border-color: var(--coral); }
+    .waitlist-input::placeholder { color: var(--text-light); }
+    .waitlist-input-dark {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.15);
+      color: white;
+    }
+    .waitlist-input-dark::placeholder { color: rgba(255,255,255,0.35); }
+    .waitlist-input-dark:focus { border-color: var(--coral); }
+    .waitlist-gdpr {
+      display: flex; align-items: flex-start; gap: 8px;
+      font-size: 0.78rem; color: var(--text-muted);
+      cursor: pointer; line-height: 1.5;
+    }
+    .waitlist-gdpr input { margin-top: 3px; flex-shrink: 0; accent-color: var(--coral); }
+    .waitlist-gdpr a { color: var(--coral); text-decoration: none; }
+    .waitlist-gdpr-dark { color: rgba(255,255,255,0.4); }
+    .waitlist-success {
+      margin-top: 12px;
+      padding: 12px 20px;
+      background: rgba(74,158,110,0.12);
+      border: 1px solid rgba(74,158,110,0.35);
+      border-radius: 50px;
+      color: var(--green); font-size: 0.9rem; font-weight: 600;
+      text-align: center;
+    }
+    .waitlist-success-dark {
+      background: rgba(74,158,110,0.15);
+      border-color: rgba(74,158,110,0.4);
+      color: #6DC98A;
+    }
+    .waitlist-error-msg {
+      margin-top: 8px;
+      font-size: 0.8rem; color: var(--coral);
+    }
+    @media (max-width: 600px) {
+      .waitlist-form { flex-direction: column; }
+      .waitlist-input { border-radius: 12px; }
+      .waitlist-form .btn-coral { border-radius: 12px; justify-content: center; }
+    }
 
     /* ── PHONE MOCKUP ── */
     .hero-visual {
@@ -506,18 +552,6 @@
     .final-cta h2 em { font-style: italic; color: var(--coral); }
     .final-cta p { color: rgba(255,255,255,0.5); font-size: 1rem; margin-bottom: 40px; }
     .final-cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .store-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: white; color: var(--text);
-      padding: 12px 24px; border-radius: 12px;
-      text-decoration: none; font-weight: 600; font-size: 0.9rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .store-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-    .store-btn-icon { font-size: 1.4rem; }
-    .store-btn-text { display: flex; flex-direction: column; text-align: left; }
-    .store-btn-sub { font-size: 0.65rem; font-weight: 400; color: var(--text-muted); }
 
     /* ── FOOTER ── */
     footer {
@@ -562,6 +596,7 @@
       .hero-sub { margin: 0 auto 40px; }
       .hero-actions { justify-content: center; }
       .hero-social-proof { justify-content: center; }
+      .waitlist-form-wrap { margin: 0 auto 16px; }
       .hero-visual { margin-top: 40px; }
       .float-left, .float-right { display: none; }
       .pillars { padding: 80px 24px; }
@@ -598,32 +633,39 @@
     <li><a href="#providers">For Providers</a></li>
   </ul>
   <div class="nav-actions">
-    <a href="#" class="btn btn-ghost">Download</a>
-    <a href="#pricing" class="btn btn-coral">Get started free</a>
+    <a href="#waitlist" class="btn btn-coral">Join the waitlist</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero" style="position:relative; overflow:hidden;">
+<section class="hero" style="position:relative; overflow:hidden;" id="waitlist">
   <div class="bg-orb orb-1"></div>
   <div class="bg-orb orb-2"></div>
 
   <div class="hero-content">
-    <div class="hero-eyebrow">Now available on iOS</div>
+    <div class="hero-eyebrow">Waitlist open · Limited beta</div>
     <h1>Health that finally <em>knows you.</em></h1>
-    <p class="hero-sub">Your AI health companion and dedicated doctor — always monitoring, always proactive, always yours. Free for everyone.</p>
-    <div class="hero-actions">
-      <a href="#" class="btn btn-coral btn-lg">↓ Download for iOS</a>
-      <a href="#pillars" class="btn btn-outline btn-lg">How it works</a>
-    </div>
-    <div class="hero-social-proof">
-      <div class="hero-avatars">
-        <span style="background: linear-gradient(135deg, #E8654A, #C44);">AM</span>
-        <span style="background: linear-gradient(135deg, #4A9E6E, #2D7A);">SC</span>
-        <span style="background: linear-gradient(135deg, #4A6CD2, #2D4A);">JR</span>
-        <span style="background: linear-gradient(135deg, #9E4A8A, #7A2D);">MK</span>
+    <p class="hero-sub">Your AI health companion and dedicated doctor — always monitoring, always proactive, always yours. Join the waitlist for early access.</p>
+
+    <div class="waitlist-form-wrap" id="hero-form-wrap">
+      <form class="waitlist-form" id="hero-waitlist">
+        <input type="email" class="waitlist-input" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit" class="btn btn-coral btn-lg">Join the waitlist</button>
+      </form>
+      <label class="waitlist-gdpr">
+        <input type="checkbox" required>
+        <span>I agree to the <a href="#privacy">privacy policy</a> and receiving updates about Personal's launch.</span>
+      </label>
+      <div class="waitlist-success" id="hero-success" style="display:none">
+        ✓ You're on the list! We'll be in touch when Personal launches.
       </div>
-      <p class="hero-proof-text"><strong>12,000+ people</strong> already have their own doctor</p>
+      <div class="waitlist-error-msg" id="hero-error" style="display:none">
+        Something went wrong. Please try again.
+      </div>
+    </div>
+
+    <div class="hero-social-proof">
+      <p class="hero-proof-text">Beta launching <strong>Summer 2026</strong> · iOS first</p>
     </div>
   </div>
 
@@ -784,7 +826,7 @@
         <span class="access-tag">Low-income households</span>
       </div>
       <br>
-      <a href="#" class="btn btn-white btn-lg" style="margin-top: 8px;">Check if you qualify →</a>
+      <a href="#waitlist" class="btn btn-white btn-lg" style="margin-top: 8px;">Join the waitlist →</a>
     </div>
     <div class="access-visual">
       <div class="access-stat">
@@ -818,7 +860,7 @@
         <li>Health score</li>
         <li>1 clinical report/month</li>
       </ul>
-      <a href="#" class="btn btn-outline price-cta">Get started</a>
+      <a href="#waitlist" class="btn btn-outline price-cta">Join waitlist</a>
     </div>
     <div class="price-card">
       <div class="price-name">Plus</div>
@@ -831,7 +873,7 @@
         <li>Agentic: booking, Rx, labs</li>
         <li>Unlimited AI chat</li>
       </ul>
-      <a href="#" class="btn btn-outline price-cta">Start Plus</a>
+      <a href="#waitlist" class="btn btn-outline price-cta">Join waitlist</a>
     </div>
     <div class="price-card featured">
       <div class="price-badge">Most popular</div>
@@ -846,7 +888,7 @@
         <li>Nutrition coaching AI</li>
         <li>GoodRx Rx integration</li>
       </ul>
-      <a href="#" class="btn btn-coral price-cta">Start Premium</a>
+      <a href="#waitlist" class="btn btn-coral price-cta">Join waitlist</a>
     </div>
     <div class="price-card">
       <div class="price-name">Care</div>
@@ -860,7 +902,7 @@
         <li>GP writes Rx + referrals</li>
         <li>Telemedicine via video</li>
       </ul>
-      <a href="#" class="btn btn-outline price-cta">Get Care</a>
+      <a href="#waitlist" class="btn btn-outline price-cta">Join waitlist</a>
     </div>
     <div class="price-card">
       <div class="price-name">Family</div>
@@ -874,38 +916,40 @@
         <li>Family health dashboard</li>
         <li>Caregiver alerts</li>
       </ul>
-      <a href="#" class="btn btn-outline price-cta">Get Family</a>
+      <a href="#waitlist" class="btn btn-outline price-cta">Join waitlist</a>
     </div>
   </div>
   <p style="text-align:center; margin-top:24px; font-size:0.85rem; color:var(--text-muted);">
-    Medicaid, veterans, students, and low-income households get Premium free. <a href="#" style="color:var(--coral);">Check eligibility →</a>
+    Medicaid, veterans, students, and low-income households get Premium free. <a href="#waitlist" style="color:var(--coral);">Join the waitlist →</a>
   </p>
 </section>
 
 <!-- FINAL CTA -->
 <section class="final-cta">
   <h2>Your health deserves to be <em>personal.</em></h2>
-  <p>Join 12,000+ people who finally have a doctor who knows them.</p>
+  <p>Be among the first to experience medicine that finally knows you. Beta launching Summer 2026.</p>
   <div class="final-cta-actions">
-    <a href="#" class="store-btn">
-      <span class="store-btn-icon"></span>
-      <span class="store-btn-text">
-        <span class="store-btn-sub">Download on the</span>
-        App Store
-      </span>
-    </a>
-    <a href="#" class="store-btn">
-      <span class="store-btn-icon">▶</span>
-      <span class="store-btn-text">
-        <span class="store-btn-sub">Get it on</span>
-        Google Play
-      </span>
-    </a>
+    <div class="waitlist-form-wrap" id="footer-form-wrap" style="max-width:500px;">
+      <form class="waitlist-form" id="footer-waitlist">
+        <input type="email" class="waitlist-input waitlist-input-dark" placeholder="your@email.com" required autocomplete="email">
+        <button type="submit" class="btn btn-coral btn-lg">Get early access</button>
+      </form>
+      <label class="waitlist-gdpr waitlist-gdpr-dark">
+        <input type="checkbox" required>
+        <span>I agree to the <a href="#privacy" style="color:rgba(255,255,255,0.6);">privacy policy</a> and receiving updates about Personal's launch.</span>
+      </label>
+      <div class="waitlist-success waitlist-success-dark" id="footer-success" style="display:none">
+        ✓ You're on the list! We'll be in touch when Personal launches.
+      </div>
+      <div class="waitlist-error-msg" id="footer-error" style="display:none">
+        Something went wrong. Please try again.
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer id="privacy">
   <div class="footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">Personal</div>
@@ -914,11 +958,11 @@
     <div class="footer-col">
       <h5>Product</h5>
       <ul>
-        <li><a href="#">How it works</a></li>
-        <li><a href="#">Features</a></li>
-        <li><a href="#">Pricing</a></li>
-        <li><a href="#">Family plan</a></li>
-        <li><a href="#">Access program</a></li>
+        <li><a href="#pillars">How it works</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#waitlist">Family plan</a></li>
+        <li><a href="#waitlist">Access program</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -998,6 +1042,62 @@
     card.style.transition = `opacity 0.5s ${i * 0.1}s, transform 0.5s ${i * 0.1}s`;
     cardObserver.observe(card);
   });
+
+  // ── WAITLIST ──
+  // Replace with your Loops.so API key from app.loops.so → Settings → API
+  const LOOPS_API_KEY = 'YOUR_LOOPS_API_KEY';
+
+  async function submitWaitlist(email, successId, errorId) {
+    try {
+      const res = await fetch('https://app.loops.so/api/v1/contacts/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${LOOPS_API_KEY}`
+        },
+        body: JSON.stringify({
+          email,
+          source: 'personal-waitlist',
+          subscribed: true,
+          userGroup: 'waitlist'
+        })
+      });
+      // Loops returns 200 for both new and duplicate contacts
+      if (res.ok) {
+        document.getElementById(successId).style.display = 'block';
+        return true;
+      }
+      console.error('[waitlist] Loops API error', res.status, await res.text());
+    } catch (err) {
+      console.error('[waitlist]', err);
+    }
+    document.getElementById(errorId).style.display = 'block';
+    return false;
+  }
+
+  function wireWaitlistForm(formId, successId, errorId) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = form.querySelector('input[type="email"]').value.trim();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Joining…';
+      const ok = await submitWaitlist(email, successId, errorId);
+      if (ok) {
+        form.style.display = 'none';
+        const gdpr = form.closest('.waitlist-form-wrap').querySelector('.waitlist-gdpr');
+        if (gdpr) gdpr.style.display = 'none';
+      } else {
+        btn.disabled = false;
+        btn.textContent = form.id === 'hero-waitlist' ? 'Join the waitlist' : 'Get early access';
+      }
+    });
+  }
+
+  wireWaitlistForm('hero-waitlist', 'hero-success', 'hero-error');
+  wireWaitlistForm('footer-waitlist', 'footer-success', 'footer-error');
 </script>
 </body>
 </html>
